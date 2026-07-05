@@ -25,11 +25,11 @@ jobs:
     - name: Generar andamio oficial de iOS
       run: briefcase create ios
 
-    - name: Compilar archivo binario Xcode
-      run: briefcase build ios --no-sign  # Compila sin requerir certificados de pago
+    - name: Compilar y empaquetar sin firma de Apple
+      run: briefcase package ios --no-sign
 
-    - name: Empaquetar y subir resultado final
+    - name: Subir binario compilado (.IPAs / Xcode)
       uses: actions/upload-artifact@v4
       with:
-        name: Proyecto-iOS-Xcode
-        path: build/calculadora/ios/xcode/
+        name: App-iOS-Compilada
+        path: build/calculadora/ios/
