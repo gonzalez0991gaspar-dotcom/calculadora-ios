@@ -23,10 +23,15 @@ jobs:
         pip install briefcase
 
     - name: Generar proyecto oficial de Xcode
-      run: briefcase create ios  # Este comando genera la estructura nativa .xcodeproj sin pedir firmas
+      run: briefcase create ios
 
-    - name: Subir Proyecto Xcode para AltStore
+    - name: Compilar binario ejecutable (.app) con Xcode
+      run: |
+        cd build/calculadora/ios/xcode
+        xcodebuild -project "Calculadora de Ritmo.xcodeproj" -scheme "Calculadora de Ritmo" -configuration Debug -sdk iphoneos CODE_SIGNING_ALLOWED=NO CODE_SIGNING_REQUIRED=NO clean build
+
+    - name: Subir archivo .app para tu iPhone
       uses: actions/upload-artifact@v4
       with:
-        name: Proyecto-Calculadora-Xcode
-        path: build/calculadora/ios/xcode/
+        name: App-Calculadora-iOS-Real
+        path: build/calculadora/ios/xcode/build/Debug-iphoneos/
