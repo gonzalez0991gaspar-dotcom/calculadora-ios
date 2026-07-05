@@ -6,13 +6,13 @@ on:
 
 jobs:
   build-ios:
-    runs-on: macos-latest  # Solicita una Mac virtual de Apple en la nube
+    runs-on: macos-latest
 
     steps:
     - name: Clonar el repositorio de Kali
       uses: actions/checkout@v3
 
-    - name: Configurar Python en la Mac
+    - name: Configurar Python
       uses: actions/setup-python@v4
       with:
         python-version: '3.10'
@@ -22,14 +22,11 @@ jobs:
         python -m pip install --upgrade pip
         pip install briefcase
 
-    - name: Generar andamio oficial de iOS
-      run: briefcase create ios
+    - name: Generar proyecto oficial de Xcode
+      run: briefcase create ios  # Este comando genera la estructura nativa .xcodeproj sin pedir firmas
 
-    - name: Compilar y empaquetar sin firma de Apple
-      run: briefcase package ios --no-sign
-
-    - name: Subir binario compilado (.IPAs / Xcode)
+    - name: Subir Proyecto Xcode para AltStore
       uses: actions/upload-artifact@v4
       with:
-        name: App-iOS-Compilada
-        path: build/calculadora/ios/
+        name: Proyecto-Calculadora-Xcode
+        path: build/calculadora/ios/xcode/
