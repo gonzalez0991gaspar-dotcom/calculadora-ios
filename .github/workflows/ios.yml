@@ -28,8 +28,7 @@ jobs:
     - name: Compilar binario ejecutable (.app) con Xcode
       run: |
         cd build/calculadora/ios/xcode
-        mkdir -p build/output
-        xcodebuild -project "Calculadora de Ritmo.xcodeproj" -scheme "Calculadora de Ritmo" -configuration Debug -sdk iphoneos CODE_SIGNING_ALLOWED=NO CODE_SIGNING_REQUIRED=NO CONFIGURATION_BUILD_DIR=build/output clean build
+        xcodebuild -project "Calculadora de Ritmo.xcodeproj" -scheme "Calculadora de Ritmo" -configuration Debug -sdk iphoneos CODE_SIGNING_ALLOWED=NO CODE_SIGNING_REQUIRED=NO CONFIGURATION_BUILD_DIR=build/output build
 
     - name: Subir archivo .app para tu iPhone
       uses: actions/upload-artifact@v4
