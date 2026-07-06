@@ -22,21 +22,13 @@ jobs:
         python -m pip install --upgrade pip
         pip install briefcase
 
-    - name: Generar proyecto oficial de Xcode
-      run: briefcase create ios
-
-    - name: Compilar binario ejecutable (.app) con Xcode
+    - name: Generar y Compilar App de forma Nativa
       run: |
-        cd build/calculadora/ios/xcode
-        xcodebuild -project "Calculadora de Ritmo.xcodeproj" -scheme "Calculadora de Ritmo" -configuration Debug -sdk iphoneos CODE_SIGNING_ALLOWED=NO CODE_SIGNING_REQUIRED=NO build
-
-    - name: Extraer y preparar el archivo .app
-      run: |
-        mkdir -p build_output
-        cp -R ~/Library/Developer/Xcode/DerivedData/Calculadora_de_Ritmo-*/Build/Products/Debug-iphoneos/*.app ./build_output/
+        briefcase create ios
+        briefcase build ios --no-sign
 
     - name: Subir archivo .app para tu iPhone
       uses: actions/upload-artifact@v4
       with:
         name: App-Calculadora-iOS-Real
-        path: build_output/
+        path: build/calculadora/ios/xcode/build/Debug-iphoneos/
