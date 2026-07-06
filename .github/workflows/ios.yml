@@ -22,10 +22,10 @@ jobs:
         python -m pip install --upgrade pip
         pip install briefcase
 
-    - name: Generar y Compilar App de forma Nativa
+    - name: Generar y Compilar App con Briefcase
       run: |
         briefcase create ios
-        briefcase build ios --no-sign
+        briefcase build ios -C CODE_SIGNING_ALLOWED=NO -C CODE_SIGNING_REQUIRED=NO
 
     - name: Subir archivo .app para tu iPhone
       uses: actions/upload-artifact@v4
