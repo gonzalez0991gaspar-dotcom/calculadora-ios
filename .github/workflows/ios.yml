@@ -25,7 +25,7 @@ jobs:
     - name: Generar y Compilar App con Briefcase
       run: |
         briefcase create ios
-        briefcase build ios -C CODE_SIGNING_ALLOWED=NO -C CODE_SIGNING_REQUIRED=NO
+        briefcase build ios
 
     - name: Subir archivo .app para tu iPhone
       uses: actions/upload-artifact@v4

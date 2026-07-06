@@ -171,6 +171,8 @@ requires = [
     "std-nslog~=1.0.3",
 ]
 
+xcode_build_settings = { CODE_SIGNING_ALLOWED = "NO", CODE_SIGNING_REQUIRED = "NO" }
+
 [tool.briefcase.app.calculadora.android]
 requires = [
     "toga-android~=0.5.0",
