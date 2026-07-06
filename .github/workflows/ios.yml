@@ -10,10 +10,10 @@ jobs:
 
     steps:
     - name: Clonar el repositorio de Kali
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
 
     - name: Configurar Python
-      uses: actions/setup-python@v4
+      uses: actions/setup-python@v5
       with:
         python-version: '3.10'
 
@@ -31,4 +31,5 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         name: App-Calculadora-iOS-Real
-        path: build/calculadora/ios/xcode/build/Debug-iphoneos/
+        path: build/calculadora/ios/xcode/**/*.app
+        include-hidden-files: true
